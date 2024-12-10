@@ -1,0 +1,13 @@
+# Use Python 3.11 slim image
+FROM python:3.11-slim
+
+# Install required packages and theHarvester
+RUN apt-get update && apt-get install -y git && \
+    git clone https://github.com/laramies/theHarvester.git /theHarvester && \
+    pip install -r /theHarvester/requirements.txt
+
+# Set working directory
+WORKDIR /theHarvester
+
+# Default command
+ENTRYPOINT ["python3", "theHarvester.py"]
